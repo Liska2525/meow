@@ -1,30 +1,37 @@
 [gd_scene load_steps=5 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Script" path="res://Scripts/cat.gd" id="1_gi6gy"]
-[ext_resource type="Texture2D" uid="uid://e0pnn7q5kmxu" path="res://Assets/Cats/game_boy_1.png" id="2_a6b23"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ps7bk"]
-atlas = ExtResource("2_a6b23")
-region = Rect2(640, 288, 128, 64)
+[ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="2_rgm8j"]
+[ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="3_0810q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
-radius = 52.0384
+radius = 48.0104
 
 [node name="Main" type="Node2D"]
 
 [node name="Cat" type="Node2D" parent="."]
-position = Vector2(900, 600)
+position = Vector2(900, 700)
 script = ExtResource("1_gi6gy")
-
-[node name="Sprite2D" type="Sprite2D" parent="Cat"]
-texture_filter = 1
-scale = Vector2(5, 5)
-texture = SubResource("AtlasTexture_ps7bk")
-hframes = 4
-vframes = 2
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Cat"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/CharacterBody2D"]
-position = Vector2(-4, -20)
 shape = SubResource("CircleShape2D_bhwr1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat"]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_rgm8j")
+animation = &"sitrightdown"
+frame_progress = 0.533638
+
+[node name="Camera2D" type="Camera2D" parent="Cat"]
+
+[node name="SitTimer" type="Timer" parent="Cat"]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(678, 675)
+texture = ExtResource("3_0810q")
+
+[connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
