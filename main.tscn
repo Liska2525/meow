@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=6 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Script" path="res://Scripts/cat.gd" id="1_gi6gy"]
 [ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="2_rgm8j"]
+[ext_resource type="Script" path="res://Scripts/wool.gd" id="3_8qimd"]
 [ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="3_0810q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
@@ -30,8 +31,19 @@ frame_progress = 0.533638
 [node name="SitTimer" type="Timer" parent="Cat"]
 one_shot = true
 
+[node name="Attacks" type="Node2D" parent="Cat"]
+
+[node name="Wool" type="Node2D" parent="Cat/Attacks"]
+script = ExtResource("3_8qimd")
+attackrange = 30
+
+[node name="SpawnTimer" type="Timer" parent="Cat/Attacks/Wool"]
+wait_time = 3.0
+autostart = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(678, 675)
 texture = ExtResource("3_0810q")
 
 [connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
+[connection signal="timeout" from="Cat/Attacks/Wool/SpawnTimer" to="Cat/Attacks/Wool" method="_on_spawn_timer_timeout"]
