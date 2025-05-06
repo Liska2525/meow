@@ -1,6 +1,7 @@
 extends Node2D
 
 var looking
+@export var damage = 10
 
 func _ready() -> void:
 	self.visible = false
@@ -29,5 +30,7 @@ func _on_spawn_timer_timeout() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if $AnimatedSprite2D.frame == 7:
+		for enemy in $Area2D.get_overlapping_bodies():
+			enemy.hp -= damage
 		self.visible = false
 		$AnimatedSprite2D.stop()

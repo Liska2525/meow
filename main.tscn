@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=31 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Script" uid="uid://df3aiqh4kfkkn" path="res://Scripts/cat.gd" id="1_gi6gy"]
+[ext_resource type="Script" uid="uid://dl8o2drh2mqb3" path="res://Scripts/enemyspawner.gd" id="2_2cqfq"]
 [ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="2_rgm8j"]
 [ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="3_8qimd"]
 [ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="3_0810q"]
@@ -13,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://csy5h4nliht" path="res://Assets/Attacks/Claws/CS006.png" id="10_cegan"]
 [ext_resource type="Texture2D" uid="uid://0mc0y0r31x8w" path="res://Assets/Attacks/Claws/CS007.png" id="11_82xsv"]
 [ext_resource type="Texture2D" uid="uid://de3o4nicq6seh" path="res://Assets/Attacks/Claws/CS008.png" id="12_getpj"]
+[ext_resource type="Script" uid="uid://bu6mv2ryp5nwr" path="res://Scripts/meow.gd" id="13_vivmo"]
+[ext_resource type="Texture2D" uid="uid://bbveo8ktw0ebp" path="res://Assets/Attacks/meow.png" id="13_w48qg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
 radius = 48.0104
@@ -55,6 +58,77 @@ size = Vector2(128.456, 244.931)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w48qg"]
 size = Vector2(1932, 1280)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vivmo"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqfq"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaehf"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
+atlas = ExtResource("13_w48qg")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1u8w0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vivmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_cegan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Main" type="Node2D"]
 
 [node name="Attacks" type="Node2D" parent="."]
@@ -66,6 +140,11 @@ script = ExtResource("3_8qimd")
 wait_time = 3.0
 autostart = true
 
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource("2_2cqfq")
+
+[node name="SpawnTimer" type="Timer" parent="Enemies"]
+
 [node name="Cat" type="Node2D" parent="."]
 position = Vector2(300, 300)
 script = ExtResource("1_gi6gy")
@@ -73,6 +152,7 @@ script = ExtResource("1_gi6gy")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Cat"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/CharacterBody2D"]
+visible = false
 shape = SubResource("CircleShape2D_bhwr1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat"]
@@ -87,6 +167,7 @@ animation = &"right"
 one_shot = true
 
 [node name="Claws" type="Node2D" parent="Cat"]
+visible = false
 script = ExtResource("4_ycdy4")
 
 [node name="SpawnTimer" type="Timer" parent="Cat/Claws"]
@@ -104,23 +185,40 @@ frame = 2
 frame_progress = 0.723546
 
 [node name="Area2D" type="Area2D" parent="Cat/Claws"]
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/Claws/Area2D"]
 position = Vector2(90.2247, 13.2159)
 shape = SubResource("RectangleShape2D_ycdy4")
 
 [node name="Meow" type="Node2D" parent="Cat"]
+visible = false
+script = ExtResource("13_vivmo")
 
 [node name="Area2D" type="Area2D" parent="Cat/Meow"]
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/Meow/Area2D"]
 position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_w48qg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat/Meow"]
+texture_filter = 1
+position = Vector2(100, -101)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_1u8w0")
+frame = 4
+frame_progress = 0.97877
+speed_scale = 2.0
+
+[node name="SpawnTimer" type="Timer" parent="Cat/Meow"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(590, 206)
 texture = ExtResource("3_0810q")
 
 [connection signal="timeout" from="Attacks/Wool/SpawnTimer" to="Attacks/Wool" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Enemies/SpawnTimer" to="Enemies" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
 [connection signal="timeout" from="Cat/Claws/SpawnTimer" to="Cat/Claws" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Cat/Meow/SpawnTimer" to="Cat/Meow" method="_on_spawn_timer_timeout"]

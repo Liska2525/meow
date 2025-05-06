@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://4dwinbqylqwd"]
+
+[ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="1_dev0r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3dyj"]
+size = Vector2(137, 136)
+
+[node name="Mouse" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_w3dyj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dev0r")
