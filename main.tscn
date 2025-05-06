@@ -214,6 +214,7 @@ speed_scale = 2.0
 [node name="SpawnTimer" type="Timer" parent="Cat/Meow"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(590, 206)
 texture = ExtResource("3_0810q")
 
