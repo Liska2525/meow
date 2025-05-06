@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed = 100
 
-var looking = Vector2.ZERO
+var looking = "right"
 
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.

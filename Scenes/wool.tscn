@@ -1,27 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://rlk8l6xjutye"]
 
 [ext_resource type="Texture2D" uid="uid://b42brccoojqi" path="res://Assets/Attacks/wool.png" id="1_1bmxr"]
+[ext_resource type="Script" uid="uid://dpt1be6660tvf" path="res://Scripts/wool.gd" id="1_cytun"]
 
-[sub_resource type="Curve2D" id="Curve2D_mfiaf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ks231"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5edf"]
 radius = 60.0333
 
-[node name="Wool" type="Path2D" groups=["Attacks"]]
-curve = SubResource("Curve2D_mfiaf")
+[node name="Wool" type="Node2D"]
+script = ExtResource("1_cytun")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="."]
-loop = false
-
-[node name="Wool" type="Node2D" parent="PathFollow2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/Wool"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-9, 7)
 scale = Vector2(5, 5)
 texture = ExtResource("1_1bmxr")
 
-[node name="Area2D" type="Area2D" parent="PathFollow2D/Wool"]
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Wool/Area2D"]
-shape = SubResource("CircleShape2D_ks231")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_u5edf")
+
+[node name="TTL" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="TTL" to="." method="_on_ttl_timeout"]

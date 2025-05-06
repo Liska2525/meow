@@ -1,17 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=18 format=3 uid="uid://weslxv1dhgyw"]
 
-[ext_resource type="Script" path="res://Scripts/cat.gd" id="1_gi6gy"]
+[ext_resource type="Script" uid="uid://df3aiqh4kfkkn" path="res://Scripts/cat.gd" id="1_gi6gy"]
 [ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="2_rgm8j"]
-[ext_resource type="Script" path="res://Scripts/wool.gd" id="3_8qimd"]
+[ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="3_8qimd"]
 [ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="3_0810q"]
+[ext_resource type="Script" uid="uid://b3pf2dftvbcqx" path="res://Scripts/claws.gd" id="4_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://dmqru7dglflb2" path="res://Assets/Attacks/Claws/CS001.png" id="5_w48qg"]
+[ext_resource type="Texture2D" uid="uid://b3nqqyxsrahtw" path="res://Assets/Attacks/Claws/CS002.png" id="6_vivmo"]
+[ext_resource type="Texture2D" uid="uid://i427uh83i53q" path="res://Assets/Attacks/Claws/CS003.png" id="7_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://bacej4w6ri6it" path="res://Assets/Attacks/Claws/CS004.png" id="8_yaehf"]
+[ext_resource type="Texture2D" uid="uid://doevp8w07jddp" path="res://Assets/Attacks/Claws/CS005.png" id="9_074og"]
+[ext_resource type="Texture2D" uid="uid://csy5h4nliht" path="res://Assets/Attacks/Claws/CS006.png" id="10_cegan"]
+[ext_resource type="Texture2D" uid="uid://0mc0y0r31x8w" path="res://Assets/Attacks/Claws/CS007.png" id="11_82xsv"]
+[ext_resource type="Texture2D" uid="uid://de3o4nicq6seh" path="res://Assets/Attacks/Claws/CS008.png" id="12_getpj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
 radius = 48.0104
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ryguw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w48qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vivmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2cqfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yaehf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_074og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cegan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_82xsv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_getpj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
+size = Vector2(128.456, 244.931)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w48qg"]
+size = Vector2(1932, 1280)
+
 [node name="Main" type="Node2D"]
 
+[node name="Attacks" type="Node2D" parent="."]
+
+[node name="Wool" type="Node2D" parent="Attacks"]
+script = ExtResource("3_8qimd")
+
+[node name="SpawnTimer" type="Timer" parent="Attacks/Wool"]
+wait_time = 3.0
+autostart = true
+
 [node name="Cat" type="Node2D" parent="."]
-position = Vector2(900, 700)
+position = Vector2(300, 300)
 script = ExtResource("1_gi6gy")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Cat"]
@@ -23,27 +79,48 @@ shape = SubResource("CircleShape2D_bhwr1")
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = ExtResource("2_rgm8j")
-animation = &"sitrightdown"
-frame_progress = 0.533638
+animation = &"right"
 
 [node name="Camera2D" type="Camera2D" parent="Cat"]
 
 [node name="SitTimer" type="Timer" parent="Cat"]
 one_shot = true
 
-[node name="Attacks" type="Node2D" parent="Cat"]
+[node name="Claws" type="Node2D" parent="Cat"]
+script = ExtResource("4_ycdy4")
 
-[node name="Wool" type="Node2D" parent="Cat/Attacks"]
-script = ExtResource("3_8qimd")
-attackrange = 30
-
-[node name="SpawnTimer" type="Timer" parent="Cat/Attacks/Wool"]
+[node name="SpawnTimer" type="Timer" parent="Cat/Claws"]
 wait_time = 3.0
 autostart = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat/Claws"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(76, -1)
+rotation = -0.981979
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ryguw")
+frame = 2
+frame_progress = 0.723546
+
+[node name="Area2D" type="Area2D" parent="Cat/Claws"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/Claws/Area2D"]
+position = Vector2(90.2247, 13.2159)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="Meow" type="Node2D" parent="Cat"]
+
+[node name="Area2D" type="Area2D" parent="Cat/Meow"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cat/Meow/Area2D"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_w48qg")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(678, 675)
+position = Vector2(590, 206)
 texture = ExtResource("3_0810q")
 
+[connection signal="timeout" from="Attacks/Wool/SpawnTimer" to="Attacks/Wool" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
-[connection signal="timeout" from="Cat/Attacks/Wool/SpawnTimer" to="Cat/Attacks/Wool" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Cat/Claws/SpawnTimer" to="Cat/Claws" method="_on_spawn_timer_timeout"]
