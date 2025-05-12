@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var damage = 10
+@export var damage = 30
 
 func _ready() -> void:
 	self.visible = false

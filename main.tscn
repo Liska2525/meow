@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=32 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Script" uid="uid://df3aiqh4kfkkn" path="res://Scripts/cat.gd" id="1_gi6gy"]
 [ext_resource type="Script" uid="uid://dl8o2drh2mqb3" path="res://Scripts/enemyspawner.gd" id="2_2cqfq"]
 [ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="2_rgm8j"]
 [ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="3_8qimd"]
 [ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="3_0810q"]
+[ext_resource type="PackedScene" uid="uid://4dwinbqylqwd" path="res://Scenes/mouse.tscn" id="3_yaehf"]
 [ext_resource type="Script" uid="uid://b3pf2dftvbcqx" path="res://Scripts/claws.gd" id="4_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dmqru7dglflb2" path="res://Assets/Attacks/Claws/CS001.png" id="5_w48qg"]
 [ext_resource type="Texture2D" uid="uid://b3nqqyxsrahtw" path="res://Assets/Attacks/Claws/CS002.png" id="6_vivmo"]
@@ -145,6 +146,8 @@ script = ExtResource("2_2cqfq")
 
 [node name="SpawnTimer" type="Timer" parent="Enemies"]
 
+[node name="Mouse" parent="Enemies" instance=ExtResource("3_yaehf")]
+
 [node name="Cat" type="Node2D" parent="."]
 position = Vector2(300, 300)
 script = ExtResource("1_gi6gy")
@@ -207,11 +210,10 @@ texture_filter = 1
 position = Vector2(100, -101)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_1u8w0")
-frame = 4
-frame_progress = 0.97877
 speed_scale = 2.0
 
 [node name="SpawnTimer" type="Timer" parent="Cat/Meow"]
+wait_time = 15.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
