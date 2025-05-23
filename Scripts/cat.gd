@@ -44,6 +44,7 @@ func _process(delta):
 	else:
 		$AnimatedSprite2D.stop()
 	position += velocity * delta
+	Global.camerapos = self.global_position
 
 
 func _on_sit_timer_timeout() -> void:

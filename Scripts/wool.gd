@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var speed = 100
-@export var damage = 0.1
+@export var damage = 100
 var destination
 
 func _ready() -> void:
@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	self.rotation += PI/100 * speed * delta
 	for enemy in $Area2D.get_overlapping_bodies():
 			enemy.hp -= damage * delta
-			print(damage * delta)
+			
 	
 func _on_ttl_timeout() -> void:
 	self.queue_free()

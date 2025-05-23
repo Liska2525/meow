@@ -1,16 +1,27 @@
 extends CharacterBody2D
 
-@export var speed = 10
+@export var speed = 40
 var direction
-@export var hp = 100
+@export var hp = 10
+
+func _ready() -> void:
+	var camerapos = Global.camerapos
+	match  randi_range(1,4):
+		1:
+			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y-800)
+		2:
+			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y+800)
+		3:
+			self.position = Vector2(camerapos.x - 1000,randi_range(camerapos.y-800,camerapos.y+800))
+		4:
+			self.position = Vector2(camerapos.x + 1000,randi_range(camerapos.y-800,camerapos.y+800))
 
 func _physics_process(delta: float) -> void:
-	print($Sprite2D.rotation_degrees)
 	direction = (get_parent().get_parent().get_node("Cat").position - self.position).normalized()
-	$Sprite2D.rotation = get_angle_to(get_parent().get_parent().get_node("Cat").position)
-	if $Sprite2D.rotation_degrees > 90:
-		$Sprite2D.rotation = get_angle_to(get_parent().get_parent().get_node("Cat").position) - PI/2
-		$Sprite2D.flip_v = true
+	if direction.x < 0:
+		$Sprite2D.flip_h = true
+	else:
+		$Sprite2D.flip_h = false
 	position += direction * speed * delta
 	if hp <= 0:
 		self.queue_free()
