@@ -5,7 +5,7 @@ extends Node2D
 var destination
 
 func _ready() -> void:
-	self.global_position = get_parent().get_parent().get_parent().get_node("Cat").position
+	self.global_position = get_parent().get_parent().get_node("Cat").position
 	destination = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
 	$TTL.start()
 

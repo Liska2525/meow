@@ -8,13 +8,13 @@ func _ready() -> void:
 	var camerapos = Global.camerapos
 	match  randi_range(1,4):
 		1:
-			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y-800)
+			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y-600)
 		2:
-			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y+800)
+			self.position = Vector2(randi_range(camerapos.x - 1000,camerapos.x + 1000),camerapos.y+600)
 		3:
-			self.position = Vector2(camerapos.x - 1000,randi_range(camerapos.y-800,camerapos.y+800))
+			self.position = Vector2(camerapos.x - 1000,randi_range(camerapos.y-600,camerapos.y+600))
 		4:
-			self.position = Vector2(camerapos.x + 1000,randi_range(camerapos.y-800,camerapos.y+800))
+			self.position = Vector2(camerapos.x + 1000,randi_range(camerapos.y-600,camerapos.y+600))
 
 func _physics_process(delta: float) -> void:
 	direction = (get_parent().get_parent().get_node("Cat").position - self.position).normalized()
