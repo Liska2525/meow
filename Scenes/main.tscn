@@ -1,5 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://weslxv1dhgyw"]
 
+[ext_resource type="Texture2D" uid="uid://dvf0b7itbspa6" path="res://map.png" id="1_k12tt"]
 [ext_resource type="Script" uid="uid://dl8o2drh2mqb3" path="res://Scripts/enemyspawner.gd" id="1_wsu2k"]
 [ext_resource type="Script" uid="uid://df3aiqh4kfkkn" path="res://Scripts/cat.gd" id="2_k12tt"]
 [ext_resource type="SpriteFrames" uid="uid://te1fyn3motjs" path="res://Assets/Animations/gameboy1.tres" id="3_h1bgf"]
@@ -15,7 +16,6 @@
 [ext_resource type="Script" uid="uid://bu6mv2ryp5nwr" path="res://Scripts/meow.gd" id="13_1w6v2"]
 [ext_resource type="Texture2D" uid="uid://bbveo8ktw0ebp" path="res://Assets/Attacks/meow.png" id="14_ueoa1"]
 [ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="15_6vcvc"]
-[ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="16_k12tt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
 radius = 48.0104
@@ -132,12 +132,12 @@ animations = [{
 [node name="Main" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 offset_left = -100000.0
 offset_top = -100000.0
 offset_right = 100000.0
 offset_bottom = 100000.0
-texture = ExtResource("16_k12tt")
+scale = Vector2(5, 5)
+texture = ExtResource("1_k12tt")
 stretch_mode = 1
 
 [node name="Enemies" type="Node2D" parent="."]
