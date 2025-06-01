@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dc1w7pvp8j8j8"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dc1w7pvp8j8j8"]
 
 [ext_resource type="FontFile" uid="uid://c1bp7y78sqhtm" path="res://Assets/Pixelscapes.ttf" id="1_0dftj"]
 [ext_resource type="StyleBox" uid="uid://1usxte7faifm" path="res://Assets/boxstyle.tres" id="2_h5t51"]
+[ext_resource type="Texture2D" uid="uid://chck7c3ft0fxe" path="res://Icons/gameicon64.png" id="3_7yyeo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5t51"]
 corner_radius_top_left = 20
@@ -9,6 +10,24 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5r8q"]
+bg_color = Color(3.85046e-07, 0.635264, 0.957612, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yyeo"]
+bg_color = Color(0, 0.635294, 0.956863, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -23,3 +42,15 @@ Button/styles/focus = ExtResource("2_h5t51")
 Button/styles/hover = SubResource("StyleBoxFlat_h5t51")
 Button/styles/normal = ExtResource("2_h5t51")
 Button/styles/pressed = ExtResource("2_h5t51")
+HSlider/icons/grabber = ExtResource("3_7yyeo")
+HSlider/icons/grabber_highlight = ExtResource("3_7yyeo")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_f5r8q")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7yyeo")
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/font_outline_color = Color(0, 0, 0, 0)
+ItemList/colors/font_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0)
+ItemList/constants/v_separation = 170
+ItemList/font_sizes/font_size = 40

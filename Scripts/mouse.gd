@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed = 40
 var direction
 @export var hp = 10
+@export var xp = 10
+@export var money = 1
 
 func _ready() -> void:
 	var camerapos = Global.camerapos
@@ -24,4 +26,6 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = false
 	position += direction * speed * delta
 	if hp <= 0:
+		Global.xp += xp
+		Global.money += money
 		self.queue_free()

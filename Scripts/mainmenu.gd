@@ -20,3 +20,12 @@ func _on_music_toggled(toggled_on: bool) -> void:
 	else:
 		Global.volume = 1
 		$AudioStreamPlayer.stream_paused = false
+
+
+func _on_audio_stream_player_finished() -> void:
+	$AudioStreamPlayer.play()
+
+
+func _on_h_slider_drag_ended(value_changed: bool) -> void:
+	Global.volume = -50+($SettingsPanel/HSlider.value/2)
+	$AudioStreamPlayer.volume_db = Global.volume
