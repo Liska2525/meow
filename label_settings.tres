@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c0vdqfawusw7q"]
+
+[ext_resource type="FontFile" uid="uid://c1bp7y78sqhtm" path="res://Assets/Pixelscapes.ttf" id="1_8aso4"]
+
+[resource]
+font = ExtResource("1_8aso4")
+font_size = 64
+font_color = Color(0, 0, 0, 1)

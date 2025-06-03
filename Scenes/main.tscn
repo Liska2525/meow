@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=49 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Texture2D" uid="uid://dvf0b7itbspa6" path="res://map.png" id="1_k12tt"]
 [ext_resource type="Script" uid="uid://dl8o2drh2mqb3" path="res://Scripts/enemyspawner.gd" id="1_wsu2k"]
@@ -16,8 +16,8 @@
 [ext_resource type="Script" uid="uid://bu6mv2ryp5nwr" path="res://Scripts/meow.gd" id="13_1w6v2"]
 [ext_resource type="Texture2D" uid="uid://bbveo8ktw0ebp" path="res://Assets/Attacks/meow.png" id="14_ueoa1"]
 [ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="15_6vcvc"]
-[ext_resource type="Theme" uid="uid://dc1w7pvp8j8j8" path="res://Assets/theme.tres" id="17_b3802"]
-[ext_resource type="Texture2D" uid="uid://bgspmh52n3blj" path="res://icon.svg" id="18_fevyy"]
+[ext_resource type="Script" uid="uid://baw3bkyypx42g" path="res://Scripts/levelup.gd" id="17_b3802"]
+[ext_resource type="LabelSettings" uid="uid://c0vdqfawusw7q" path="res://label_settings.tres" id="17_h1bgf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
 radius = 48.0104
@@ -134,24 +134,32 @@ animations = [{
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k12tt"]
 bg_color = Color(0.941176, 0.85098, 0.941176, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k12tt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3802"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fevyy"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fevyy"]
+[sub_resource type="LabelSettings" id="LabelSettings_fevyy"]
+font_size = 50
+font_color = Color(0, 0.431828, 0.387506, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hibaj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hibaj"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdsj5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ee4r6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt3je"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pmx8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u50mg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbgmd"]
+bg_color = Color(0, 0, 0, 0.447059)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1w6v2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ueoa1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vcvc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7k868"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1bgf"]
 bg_color = Color(1, 1, 1, 0)
@@ -258,40 +266,139 @@ speed_scale = 4.0
 wait_time = 30.0
 autostart = true
 
-[node name="Panel" type="Panel" parent="Cat"]
+[node name="Levelup" type="Panel" parent="Cat"]
 process_mode = 3
-offset_left = -250.0
-offset_top = -350.0
-offset_right = 250.0
-offset_bottom = 350.0
+offset_left = -300.0
+offset_top = -375.0
+offset_right = 300.0
+offset_bottom = 375.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k12tt")
+script = ExtResource("17_b3802")
 
-[node name="ItemList" type="ItemList" parent="Cat/Panel"]
-process_mode = 3
+[node name="GridContainer" type="GridContainer" parent="Cat/Levelup"]
 layout_mode = 0
-offset_right = 500.0
-offset_bottom = 700.0
-theme = ExtResource("17_b3802")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_k12tt")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_b3802")
-theme_override_styles/hovered = SubResource("StyleBoxFlat_fevyy")
-theme_override_styles/hovered_selected = SubResource("StyleBoxEmpty_fevyy")
-theme_override_styles/hovered_selected_focus = SubResource("StyleBoxEmpty_hibaj")
-theme_override_styles/selected = SubResource("StyleBoxFlat_hibaj")
-theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_ee4r6")
-theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_gt3je")
-theme_override_styles/cursor = SubResource("StyleBoxEmpty_3pmx8")
-allow_search = false
-auto_width = true
-auto_height = true
-item_count = 3
-fixed_icon_size = Vector2i(64, 64)
-item_0/text = "Claws"
-item_0/icon = ExtResource("18_fevyy")
-item_1/text = "Meow"
-item_1/icon = ExtResource("18_fevyy")
-item_2/text = "Wool"
-item_2/icon = ExtResource("18_fevyy")
+offset_right = 600.0
+offset_bottom = 900.0
+
+[node name="Label" type="Label" parent="Cat/Levelup/GridContainer"]
+custom_minimum_size = Vector2(600, 150)
+layout_mode = 2
+text = "You leveled up!
+Choose upgrade"
+label_settings = SubResource("LabelSettings_fevyy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Item1" type="Control" parent="Cat/Levelup/GridContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Cat/Levelup/GridContainer/Item1"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 80.0
+label_settings = ExtResource("17_h1bgf")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Description" type="Label" parent="Cat/Levelup/GridContainer/Item1"]
+custom_minimum_size = Vector2(600, 120)
+layout_mode = 0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 200.0
+
+[node name="Button1" type="Button" parent="Cat/Levelup/GridContainer/Item1"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hibaj")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pdsj5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ee4r6")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gt3je")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_3pmx8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u50mg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cbgmd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1w6v2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ueoa1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6vcvc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k868")
+
+[node name="Item2" type="Control" parent="Cat/Levelup/GridContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Cat/Levelup/GridContainer/Item2"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 80.0
+label_settings = ExtResource("17_h1bgf")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Description" type="Label" parent="Cat/Levelup/GridContainer/Item2"]
+custom_minimum_size = Vector2(600, 120)
+layout_mode = 0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 200.0
+
+[node name="Button2" type="Button" parent="Cat/Levelup/GridContainer/Item2"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hibaj")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pdsj5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ee4r6")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gt3je")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_3pmx8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u50mg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cbgmd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1w6v2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ueoa1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6vcvc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k868")
+
+[node name="Item3" type="Control" parent="Cat/Levelup/GridContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Cat/Levelup/GridContainer/Item3"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 80.0
+label_settings = ExtResource("17_h1bgf")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Description" type="Label" parent="Cat/Levelup/GridContainer/Item3"]
+custom_minimum_size = Vector2(600, 120)
+layout_mode = 0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 200.0
+
+[node name="Button3" type="Button" parent="Cat/Levelup/GridContainer/Item3"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hibaj")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pdsj5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ee4r6")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gt3je")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_3pmx8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u50mg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cbgmd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1w6v2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ueoa1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6vcvc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k868")
 
 [node name="HUD" type="Control" parent="Cat"]
 layout_mode = 3
@@ -324,3 +431,6 @@ horizontal_alignment = 2
 [connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
 [connection signal="timeout" from="Cat/Claws/SpawnTimer" to="Cat/Claws" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Cat/Meow/SpawnTimer" to="Cat/Meow" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="Cat/Levelup/GridContainer/Item1/Button1" to="Cat/Levelup" method="_on_button_1_pressed"]
+[connection signal="pressed" from="Cat/Levelup/GridContainer/Item2/Button2" to="Cat/Levelup" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Cat/Levelup/GridContainer/Item3/Button3" to="Cat/Levelup" method="_on_button_3_pressed"]
