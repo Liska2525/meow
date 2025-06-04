@@ -19,15 +19,21 @@ extends Node2D
 @onready var moneylabel = $HUD/Label
 var looking = "right"
 @onready var levels = Global.load_json("res://levelup.json")
-
+@onready var AudioPlayer = get_parent().get_node("AudioStreamPlayer")
 
 
 func _ready() -> void:
-	$Panel.visible = false
+	$Levelup.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	progressbar.max_value = levels["1"]
+	if not Global.muted:
+		AudioPlayer.playing = true
+		AudioPlayer.volume_db = Global.volume
 
 func _physics_process(delta: float) -> void:
+	
+	$HUD/Label.text = str(Global.money)
+	
 	progressbar.value = Global.xp
 	if progressbar.value >= progressbar.max_value:
 		Global.xp -= levels[str(Global.level)]
@@ -78,11 +84,17 @@ func _physics_process(delta: float) -> void:
 	Global.camerapos = self.global_position
 
 func levelup():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$Panel.visible = true
-	get_tree().paused = true
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#$Panel.visible = true
+	#get_tree().paused = true
+	$HUD/TemporaryLevelupLabel.visible = true
+	$HUD/TemporaryLevelupTimer.start()
 
 
 
 func _on_sit_timer_timeout() -> void:
 	$AnimatedSprite2D.play("sit"+looking)
+
+#temporary levelup
+func _on_temporary_levelup_timer_timeout() -> void:
+	$HUD/TemporaryLevelupLabel.visible = false

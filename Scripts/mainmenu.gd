@@ -32,16 +32,11 @@ func _on_quit_pressed() -> void:
 
 func _on_music_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		Global.volume = 0
 		$AudioStreamPlayer.stream_paused = true
+		Global.muted = true
 	else:
-		Global.volume = 1
 		$AudioStreamPlayer.stream_paused = false
-
-
-func _on_audio_stream_player_finished() -> void:
-	$AudioStreamPlayer.play()
-
+		Global.muted = false
 
 func _on_h_slider_drag_ended(value_changed: bool) -> void:
 	Global.volume = -50+($SettingsPanel/HSlider.value/2)

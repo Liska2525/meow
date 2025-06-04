@@ -20,6 +20,7 @@ var xp = 0
 var level = 1
 var money = 0
 var savepreset = {"money":0,"volume":0}
+var muted = false
 
 func load_json(json_file_path):
 	return JSON.parse_string(FileAccess.open(json_file_path, FileAccess.READ).get_as_text())

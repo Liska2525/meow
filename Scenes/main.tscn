@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://weslxv1dhgyw"]
+[gd_scene load_steps=51 format=3 uid="uid://weslxv1dhgyw"]
 
 [ext_resource type="Texture2D" uid="uid://dvf0b7itbspa6" path="res://map.png" id="1_k12tt"]
 [ext_resource type="Script" uid="uid://dl8o2drh2mqb3" path="res://Scripts/enemyspawner.gd" id="1_wsu2k"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://cve7qr218uar1" path="res://Scripts/woolspawner.gd" id="15_6vcvc"]
 [ext_resource type="Script" uid="uid://baw3bkyypx42g" path="res://Scripts/levelup.gd" id="17_b3802"]
 [ext_resource type="LabelSettings" uid="uid://c0vdqfawusw7q" path="res://label_settings.tres" id="17_h1bgf"]
+[ext_resource type="AudioStream" uid="uid://c7h8chp877j4v" path="res://Assets/meowsong.tres" id="19_fevyy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhwr1"]
 radius = 48.0104
@@ -175,6 +176,9 @@ corner_radius_bottom_left = 25
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_b3802"]
+font_size = 128
+
 [node name="Main" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -268,6 +272,7 @@ autostart = true
 
 [node name="Levelup" type="Panel" parent="Cat"]
 process_mode = 3
+visible = false
 offset_left = -300.0
 offset_top = -375.0
 offset_right = 300.0
@@ -426,6 +431,23 @@ text = "0"
 label_settings = SubResource("LabelSettings_k12tt")
 horizontal_alignment = 2
 
+[node name="TemporaryLevelupLabel" type="Label" parent="Cat/HUD"]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 540.0
+text = "you leveled up"
+label_settings = SubResource("LabelSettings_b3802")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TemporaryLevelupTimer" type="Timer" parent="Cat/HUD"]
+wait_time = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_fevyy")
+
 [connection signal="timeout" from="Enemies/SpawnTimer" to="Enemies" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Wool/SpawnTimer" to="Wool" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Cat/SitTimer" to="Cat" method="_on_sit_timer_timeout"]
@@ -434,3 +456,4 @@ horizontal_alignment = 2
 [connection signal="pressed" from="Cat/Levelup/GridContainer/Item1/Button1" to="Cat/Levelup" method="_on_button_1_pressed"]
 [connection signal="pressed" from="Cat/Levelup/GridContainer/Item2/Button2" to="Cat/Levelup" method="_on_button_2_pressed"]
 [connection signal="pressed" from="Cat/Levelup/GridContainer/Item3/Button3" to="Cat/Levelup" method="_on_button_3_pressed"]
+[connection signal="timeout" from="Cat/HUD/TemporaryLevelupTimer" to="Cat" method="_on_temporary_levelup_timer_timeout"]
